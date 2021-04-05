@@ -23,4 +23,5 @@ public class MaterialController {
         List<TPjMaterialContractDetailed> materialContractDetailed = materialService.getMaterialContractDetailed();
         return returnContent.getContent(materialContractDetailed,"数据获取成功","数据获取失败");
     }
+
 }
