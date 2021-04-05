@@ -15,8 +15,9 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Resource
     private MaterialDao materialDao;
-
+    
     public List<TPjMaterialContractDetailed> getMaterialContractDetailed() {
         return materialDao.getMaterialContractDetailed();
     }
+    
 }

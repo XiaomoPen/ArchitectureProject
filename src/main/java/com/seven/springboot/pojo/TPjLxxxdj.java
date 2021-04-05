@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TPjLxxxdj {
-
   private Timestamp lxxxdjRq;
   private String lxxxdjBh;
   private String lxxxdjXmmc;
