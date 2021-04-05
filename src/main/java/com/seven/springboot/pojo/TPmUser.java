@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -15,7 +16,7 @@ public class TPmUser {
   private String userNumber;
   private String userJobNumber;
   private String userName;
-  private Integer userSex;
+  private String  userSex;
   private Timestamp userBirthday;
   private Timestamp userIntime;
   private Timestamp userPositive;
@@ -52,11 +53,11 @@ public class TPmUser {
   }
 
 
-  public Integer getUserSex() {
+  public String getUserSex() {
     return userSex;
   }
 
-  public void setUserSex(Integer userSex) {
+  public void setUserSex(String userSex) {
     this.userSex = userSex;
   }
 
@@ -127,4 +128,76 @@ public class TPmUser {
     this.userState = userState;
   }
 
+
+
+
+
+  private TPmDepartment department;
+
+
+  public TPmDepartment getDepartment() {
+    return department;
+  }
+
+  public void setDepartment(TPmDepartment department) {
+    this.department = department;
+  }
+
+
+  private TPmPosition tPmPosition;
+
+
+  public TPmPosition gettPmPosition() {
+    return tPmPosition;
+  }
+
+  public void settPmPosition(TPmPosition tPmPosition) {
+    this.tPmPosition = tPmPosition;
+  }
+
+
+
+  private List<TPmContract> tPmContracts;
+
+  public List<TPmContract> gettPmContracts() {
+    return tPmContracts;
+  }
+
+  public void settPmContracts(List<TPmContract> tPmContracts) {
+    this.tPmContracts = tPmContracts;
+  }
+
+
+
+  private List<TPmPositive> pmPositives;
+
+  public List<TPmPositive> getPmPositives() {
+    return pmPositives;
+  }
+
+  public void setPmPositives(List<TPmPositive> pmPositives) {
+    this.pmPositives = pmPositives;
+  }
+
+
+  private List<TPmDeparture> tPmDepartures;
+
+  public List<TPmDeparture> gettPmDepartures() {
+    return tPmDepartures;
+  }
+
+  public void settPmDepartures(List<TPmDeparture> tPmDepartures) {
+    this.tPmDepartures = tPmDepartures;
+  }
+
+
+  private List<TPmCard> cards;
+
+  public List<TPmCard> getCards() {
+    return cards;
+  }
+
+  public void setCards(List<TPmCard> cards) {
+    this.cards = cards;
+  }
 }

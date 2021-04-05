@@ -1,0 +1,78 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.springboot.mapper.lyh.LyhUserDao">
+    <resultMap id="find2" type="com.seven.springboot.pojo.TPmUser">
+        <id column="user_number" property="userNumber"></id>
+        <result column="user_Jobnumber" property="userJobNumber"></result>
+        <result column="user_name" property="userName"></result>
+        <result column="user_sex" property="userSex"></result>
+        <result column="user_birthday" property="userBirthday"></result>
+        <result column="user_intime" property="userIntime"></result>
+        <result column="user_positive" property="userPositive"></result>
+        <result column="user_departure" property="userDeparture"></result>
+        <result column="position_number" property="positionNumber"></result>
+        <result column="department_number" property="departmentNumber"></result>
+        <result column="user_state" property="userState"></result>
+
+
+        <association property="department" javaType="com.seven.springboot.pojo.TPmDepartment">
+            <id column="department_number" property="departmentNumber"></id>
+            <result column="department_name" property="departmentName"></result>
+            <result column="department_time" property="departmentTime"></result>
+            <result column="user_number" property="userNumber"></result>
+        </association>
+
+        <association property="tPmPosition" javaType="com.seven.springboot.pojo.TPmPosition">
+            <id column="position_number" property="positionNumber"></id>
+            <result property="position_name" column="positionName"></result>
+            <result column="position_time" property="positionTime"></result>
+            <result column="user_number" property="userNumber"></result>
+        </association>
+    </resultMap>
+
+
+<!--    <insert id="adduser" >-->
+
+<!--        Insert into t_pm_user(user_number,user_Jobnumber,user_name,-->
+<!--        user_sex,user_birthday,user_intime,-->
+<!--        position_numbber,department_number,user_state)-->
+<!--         values(#{userName},#{userJobNumber},#{userName},-->
+<!--                #{userSex},#{userBirthday},#{userIntime},#{positionNumber},#{departmentNumber},0)-->
+
+
+
+<!--    </insert>-->
+
+
+
+        <select id="gj" resultMap="find2">
+        select * from t_pm_user a
+            left join t_pm_department b on a.department_number =b.department_number
+            left join t_pm_position c on a.position_number=c.position_number
+        <where>
+            <if test="userName !=null and userName !=''">
+                and a.user_name like '%${userName}%'
+            </if>
+
+        <if test="department.departmentName !=null and department.departmentName !='' ">
+            and b.departmentName like '%${department.departmentName}%'
+        </if>
+
+            <if test="tPmPosition.positionName !=null and tPmPosition.positionName !=''">
+                and c.positionName like '%${tPmPosition.positionName}%'
+            </if>
+
+        </where>
+        </select>
+
+    <select id="findByUserNumber" resultMap="find2">
+        select * from t_pm_user a
+                          left join t_pm_department b on a.department_number =b.department_number
+                          left join t_pm_position c on a.position_number=c.position_number
+            where a.user_number =#{userNumber}
+    </select>
+    <select id="findAll" resultMap="find2">
+        select * from t_pm_user a
+                          left join t_pm_department b on a.department_number =b.department_number
+                          left join t_pm_position c on a.position_number=c.position_number
+    </select>
+</mapper>

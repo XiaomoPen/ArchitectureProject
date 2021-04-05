@@ -90,4 +90,14 @@ public class TPmDeparture {
     this.departureState = departureState;
   }
 
+
+  private TPmUser tPmUser;
+
+  public TPmUser gettPmUser() {
+    return tPmUser;
+  }
+
+  public void settPmUser(TPmUser tPmUser) {
+    this.tPmUser = tPmUser;
+  }
 }
