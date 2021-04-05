@@ -1,7 +1,10 @@
 package com.seven.springboot.pojo;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Timestamp;
 
 @Data
@@ -57,7 +60,8 @@ public class TPmUser {
     this.userSex = userSex;
   }
 
-
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   public Timestamp getUserBirthday() {
     return userBirthday;
   }
@@ -66,7 +70,8 @@ public class TPmUser {
     this.userBirthday = userBirthday;
   }
 
-
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   public Timestamp getUserIntime() {
     return userIntime;
   }
@@ -75,7 +80,8 @@ public class TPmUser {
     this.userIntime = userIntime;
   }
 
-
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   public Timestamp getUserPositive() {
     return userPositive;
   }
@@ -84,7 +90,8 @@ public class TPmUser {
     this.userPositive = userPositive;
   }
 
-
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   public Timestamp getUserDeparture() {
     return userDeparture;
   }
