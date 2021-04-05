@@ -3,6 +3,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -50,4 +51,24 @@ public class TPmDepartment {
     this.userNumber = userNumber;
   }
 
+
+  private List<TPmMobilize> tPmMobilizes;
+
+  public List<TPmMobilize> gettPmMobilizes() {
+    return tPmMobilizes;
+  }
+
+  public void settPmMobilizes(List<TPmMobilize> tPmMobilizes) {
+    this.tPmMobilizes = tPmMobilizes;
+  }
+
+  private List<TPmCard> cards;
+
+  public List<TPmCard> getCards() {
+    return cards;
+  }
+
+  public void setCards(List<TPmCard> cards) {
+    this.cards = cards;
+  }
 }

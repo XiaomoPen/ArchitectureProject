@@ -110,4 +110,15 @@ public class TPmContract {
     this.contractFailure = contractFailure;
   }
 
+
+
+  private TPmUser user;
+
+  public TPmUser getUser() {
+    return user;
+  }
+
+  public void setUser(TPmUser user) {
+    this.user = user;
+  }
 }

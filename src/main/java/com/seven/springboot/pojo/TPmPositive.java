@@ -70,4 +70,18 @@ public class TPmPositive {
     this.positiveState = positiveState;
   }
 
+
+
+  private TPmUser tPmUser;
+
+  public TPmUser gettPmUser() {
+    return tPmUser;
+  }
+
+  public void settPmUser(TPmUser tPmUser) {
+    this.tPmUser = tPmUser;
+  }
+
+
+
 }
