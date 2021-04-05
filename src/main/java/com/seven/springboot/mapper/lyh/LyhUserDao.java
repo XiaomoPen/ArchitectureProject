@@ -17,9 +17,9 @@ public interface LyhUserDao {
 
     @Insert("Insert into t_pm_user(user_number,user_Jobnumber,user_name,\n" +
             "        user_sex,user_birthday,user_intime,\n" +
-            "        position_numbber,department_number,user_state)\n" +
-            "         values(#{userName},#{userJobNumber},#{userName},\n" +
-            "                #{userSex},#{userBirthday},#{userIntime},#{positionNumber},#{departmentNumber},0)")
+            "        position_number,department_number,user_state)\n" +
+            "         values(#{userNumber},#{userJobNumber},#{userName},\n" +
+            "                #{userSex},#{userBirthday},#{userIntime},#{positionNumber},#{departmentNumber},#{userState})")
     public Integer adduser(TPmUser tPmUser);
 
 

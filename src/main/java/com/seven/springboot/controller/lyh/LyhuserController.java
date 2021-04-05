@@ -7,6 +7,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.seven.springboot.pojo.TPmUser;
 import com.seven.springboot.service.lyh.impl.LyhUserService;
+import com.seven.springboot.utils.RandomNumber;
 import com.seven.springboot.utils.RestContent;
 import com.seven.springboot.utils.ReturnContent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,13 @@ public class LyhuserController {
     LyhUserService bs;
     @Autowired
     private ReturnContent returnContent;
+    @Autowired
+    private RandomNumber randomNumber;
 
 
     @RequestMapping("find-user")
     public RestContent tpmUser(Integer pageNum, Integer size) {
         Map<String, Object> map = new HashMap<>();
-
         Page<Object> page = PageHelper.startPage(pageNum, size);
         List<TPmUser> users = bs.findAll();
         map.put("rows", users);
@@ -56,13 +58,19 @@ public class LyhuserController {
 
     @PostMapping("add-user")
     public RestContent adduser(@RequestBody TPmUser pmUser){
+        pmUser.setUserNumber(randomNumber.getOrder());
+        pmUser.setUserJobNumber(randomNumber.getRandom());
+        System.out.println(pmUser);
+
+
+
         Integer adduser = bs.adduser(pmUser);
         return returnContent.getContent(adduser,"成功","失败");
 
     }
 
 
-    @GetMapping("find-user")
+    @GetMapping("find-userId")
     public RestContent findById( String userNumber){
 
         List<TPmUser> byUserNumber = bs.findByUserNumber(userNumber);

@@ -54,11 +54,11 @@
             </if>
 
         <if test="department.departmentName !=null and department.departmentName !='' ">
-            and b.departmentName like '%${department.departmentName}%'
+            and b.department_name like '%${department.departmentName}%'
         </if>
 
             <if test="tPmPosition.positionName !=null and tPmPosition.positionName !=''">
-                and c.positionName like '%${tPmPosition.positionName}%'
+                and c.position_name like '%${tPmPosition.positionName}%'
             </if>
 
         </where>
