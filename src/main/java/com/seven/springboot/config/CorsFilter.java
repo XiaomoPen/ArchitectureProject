@@ -1,5 +1,6 @@
 package com.seven.springboot.config;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -10,7 +11,7 @@ import java.io.IOException;
 /**
  * 为vue跨域访问设置过滤器
  */
-@Component
+@Configuration
 public class CorsFilter implements Filter {
 
     public void init(FilterConfig filterConfig) throws ServletException {
