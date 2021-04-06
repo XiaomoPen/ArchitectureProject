@@ -10,8 +10,6 @@ import com.seven.springboot.utils.RestContent;
 import com.seven.springboot.utils.ReturnContent;
 import com.seven.springboot.vo.pht.MaterialContractInfoVo;
 import com.seven.springboot.vo.pht.MaterialContractVo;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +43,7 @@ public class MaterialContractController {
         List<TPjClcrkmx> clcrkmxs = contractVo.getClcrkmxs();
         for(int i=0;i<clcrkmxs.size();i++){
             TPjClcrkmx tPjClcrkmx = clcrkmxs.get(i);
-            tPjClcrkmx.setClcrkmxNumber(number);
+            tPjClcrkmx.setClcrkNumber(number);
             clcrkmxs.set(i,tPjClcrkmx);
         }
         contractVo.setClcrkmxs(clcrkmxs);
