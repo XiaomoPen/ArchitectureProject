@@ -21,10 +21,30 @@ public class TbxxServiceImpl implements TbxxService {
     public void tbxxAdd(TPjTbxx tPjTbxx) {
         tbxxDao.tbxxAdd(tPjTbxx);
     }
-    //查询最后一条数据
-    public TPjTbxx tbxxFinally() {
-        return tbxxDao.tbxxFinally();
+    //查询新增的一条数据
+    public TPjTbxx tbxxFinally(String tbxxBh) {
+        return tbxxDao.tbxxFinally(tbxxBh);
     }
 
+    //删除数据
+    public void tbxxDelete(String tbxxBh) {
+        tbxxDao.tbxxDelete(tbxxBh);
+    }
+    //修改审批状态为待审批
+    public void tbxxUpdate(String tbxxBh) {
+        tbxxDao.tbxxUpdate(tbxxBh);
+    }
+    //修改审批状态为通过
+    public void tbxxUpdate1(String tbxxBh) {
+        tbxxDao.tbxxUpdate1(tbxxBh);
+    }
+    //修改审批状态为不通过
+    public void tbxxUpdate2(String tbxxBh) {
+        tbxxDao.tbxxUpdate2(tbxxBh);
+    }
+    //模糊查询
+    public List<TPjTbxx> tbxxSelect(String tbxxName) {
+        return tbxxDao.tbxxSelect(tbxxName);
+    }
 
 }
