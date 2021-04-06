@@ -21,23 +21,8 @@ public interface TbxxDao {
             "#{tbxxDz},#{tbxxXz},#{tbxxLx},#{tbxxFzr},#{tbxxTbrq},#{tbxxYjtbfy},#{tbxxYjhtje}," +
             "#{tbxxJsdw},#{tbxxLxr},#{tbxxLxdh},#{tbxxLrr},#{tbxxSpjg})\n")
     public void tbxxAdd(TPjTbxx tPjTbxx);
-    //根据编号查询的一条数据
-    @Select("select * from t_pj_tbxx where tbxx_bh = #{tbxxBh}")
-    public TPjTbxx tbxxFinally(String tbxxBh);
-    //投标信息登记删除
-    @Select("delete from t_pj_tbxx where tbxx_bh = #{tbxxBh}")
-    public void tbxxDelete(String tbxxBh);
-    //投标信息登记审批状态修改
-    @Select("update t_pj_tbxx set tbxx_spjg = 1 where tbxx_bh = #{tbxxBh}")
-    public void tbxxUpdate(String tbxxBh);
-    //投标信息登记审批状态修改
-    @Select("update t_pj_tbxx set tbxx_spjg = 2 where tbxx_bh = #{tbxxBh}")
-    public void tbxxUpdate1(String tbxxBh);
-    //投标信息登记审批状态修改
-    @Select("update t_pj_tbxx set tbxx_spjg = 3 where tbxx_bh = #{tbxxBh}")
-    public void tbxxUpdate2(String tbxxBh);
-    //根据项目名称模糊查询
-    @Select("select * from t_pj_tbxx where tbxx_name like concat('%',#{tbxxName},'%');")
-    public List<TPjTbxx> tbxxSelect(String tbxxName);
+    //投标信息登记最后一条数据
+    @Select("select * from t_pj_tbxx order by tbxx_id desc limit 1")
+    public TPjTbxx tbxxFinally();
 
 }
