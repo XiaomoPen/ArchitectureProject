@@ -14,6 +14,7 @@ public class TPmCard {
   private String cardNumber;
   private String userName;
   private String cardLeix;
+  private String departmentNumber;
   private Timestamp cardForensics;
   private Timestamp cardEffect;
   private Timestamp cardDue;
@@ -55,6 +56,13 @@ public class TPmCard {
     this.userName = userName;
   }
 
+  public String getDepartmentNumber() {
+    return departmentNumber;
+  }
+
+  public void setDepartmentNumber(String departmentNumber) {
+    this.departmentNumber = departmentNumber;
+  }
 
   public String getCardLeix() {
     return cardLeix;
@@ -100,4 +108,25 @@ public class TPmCard {
     this.cardNote = cardNote;
   }
 
+
+
+  private TPmUser user;
+
+  public TPmUser getUser() {
+    return user;
+  }
+
+  public void setUser(TPmUser user) {
+    this.user = user;
+  }
+
+  private TPmDepartment department;
+
+  public TPmDepartment getDepartment() {
+    return department;
+  }
+
+  public void setDepartment(TPmDepartment department) {
+    this.department = department;
+  }
 }

@@ -1,0 +1,82 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.springboot.mapper.lyh.LyhCardDao">
+    <resultMap id="findAll" type="com.seven.springboot.pojo.TPmCard">
+        <id column="card_serial" property="cardSerial"></id>
+        <result column="user_number" property="userNumber"></result>
+        <result column="card_number" property="cardNumber"></result>
+        <result column="user_name" property="userName"></result>
+        <result column="user_leix" property="cardLeix"></result>
+        <result column="department_number" property="departmentNumber"></result>
+        <result column="card_forensics" property="cardForensics"></result>
+        <result column="card_effect" property="cardEffect"></result>
+        <result column="card_due" property="cardDue"></result>
+        <result column="card_note" property="cardNote"></result>
+
+
+
+        <association property="user" resultMap="com.seven.springboot.pojo.TPmUser">
+            <id column="user_number" property="userNumber"></id>
+            <result column="user_Jobnumber" property="userJobNumber"></result>
+            <result column="user_name" property="userName"></result>
+            <result column="user_sex" property="userSex"></result>
+            <result column="user_birthday" property="userBirthday"></result>
+            <result column="user_intime" property="userIntime"></result>
+            <result column="user_positive" property="userPositive"></result>
+            <result column="user_departure" property="userDeparture"></result>
+            <result column="position_number" property="positionNumber"></result>
+            <result column="department_number" property="departmentNumber"></result>
+            <result column="user_state" property="userState"></result>
+        </association>
+
+
+        <association property="department" javaType="com.seven.springboot.pojo.TPmDepartment">
+            <id column="department_number" property="departmentNumber"></id>
+            <result column="department_name" property="departmentName"></result>
+            <result column="department_time" property="departmentTime"></result>
+            <result column="user_number" property="userNumber"></result>
+        </association>
+
+
+
+    </resultMap>
+
+    <select id="findAll" resultMap="findAll">
+        select * from t_pm_card a
+        left join t_pm_user b on a.user_number = b.user_number
+        left join t_pm_department c on a.department_number = c.department_number
+    </select>
+
+    <select id="findById" resultMap="findAll">
+        select * from t_pm_card a
+                          left join t_pm_user b on a.user_number = b.user_number
+                          left join t_pm_department c on a.department_number = c.department_number
+        where a.card_serial =#{cardSerial}
+
+    </select>
+
+    <select id="findAll2" resultMap="findAll">
+        select * from t_pm_card a
+                          left join t_pm_user b on a.user_number = b.user_number
+                          left join t_pm_department c on a.department_number = c.department_number
+        <where>
+            <if test="user.userName !=null and user.userName !=''">
+                and b.user_name like '%${user.userName}%'
+            </if>
+            <if test="cardLeix !=null and cardLeix !=''">
+                and a.card_leix like '%${cardLeix}%'
+            </if>
+        </where>
+    </select>
+
+
+    <insert id="addCard">
+        insert into t_pm_card(card_serial,user_number,
+        card_number,user_name,user_leix,department_number,
+        card_forensics,card_effect,card_due,card_note) values(#{cardSerial},#{userNumber},
+        #{cardNumber},#{userName},#{cardLeix},#{departmentNumber},
+        #{cardForensics},#{cardEffect},#{cardDue},#{cardNote});
+
+    </insert>
+    
+    
+</mapper>

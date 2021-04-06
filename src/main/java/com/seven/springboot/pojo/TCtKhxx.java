@@ -1,8 +1,8 @@
 package com.seven.springboot.pojo;
+import java.sql.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.sql.Timestamp;
 
 @Data
 @AllArgsConstructor
@@ -16,7 +16,7 @@ public class TCtKhxx {
   private String khxxKhly;
   private String khxxKhdj;
   private String khxxKhdh;
-  private Timestamp khxxLrsj;
+  private java.sql.Timestamp khxxLrsj;
   private String userNumber;
   private String userMc;
 
@@ -84,11 +84,11 @@ public class TCtKhxx {
   }
 
 
-  public Timestamp getKhxxLrsj() {
+  public java.sql.Timestamp getKhxxLrsj() {
     return khxxLrsj;
   }
 
-  public void setKhxxLrsj(Timestamp khxxLrsj) {
+  public void setKhxxLrsj(java.sql.Timestamp khxxLrsj) {
     this.khxxLrsj = khxxLrsj;
   }
 

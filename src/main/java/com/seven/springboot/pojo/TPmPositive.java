@@ -1,7 +1,10 @@
 package com.seven.springboot.pojo;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Timestamp;
 
 @Data
@@ -12,7 +15,7 @@ public class TPmPositive {
   private String positiveSerial;
   private String userNumber;
   private Timestamp positiveTime;
-  private Timestamp postiveSqpositive;
+  private Timestamp positiveSqpositive;
   private String positiveNote;
   private Integer positiveState;
 
@@ -34,7 +37,8 @@ public class TPmPositive {
     this.userNumber = userNumber;
   }
 
-
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   public Timestamp getPositiveTime() {
     return positiveTime;
   }
@@ -43,15 +47,15 @@ public class TPmPositive {
     this.positiveTime = positiveTime;
   }
 
-
-  public Timestamp getPostiveSqpositive() {
-    return postiveSqpositive;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+  public Timestamp getPositiveSqpositive() {
+    return positiveSqpositive;
   }
 
-  public void setPostiveSqpositive(Timestamp postiveSqpositive) {
-    this.postiveSqpositive = postiveSqpositive;
+  public void setPositiveSqpositive(Timestamp positiveSqpositive) {
+    this.positiveSqpositive = positiveSqpositive;
   }
-
 
   public String getPositiveNote() {
     return positiveNote;
@@ -69,5 +73,19 @@ public class TPmPositive {
   public void setPositiveState(Integer positiveState) {
     this.positiveState = positiveState;
   }
+
+
+
+  private TPmUser tPmUser;
+
+  public TPmUser gettPmUser() {
+    return tPmUser;
+  }
+
+  public void settPmUser(TPmUser tPmUser) {
+    this.tPmUser = tPmUser;
+  }
+
+
 
 }

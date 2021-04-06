@@ -11,13 +11,14 @@ public class TPmMobilize {
 
   private String mobilizeSerial;
   private String userNumber;
-  private String userName;
+  private String userName2;
   private String mobilizeLeix;
   private String mobilizeDept;
   private String mobilizeGw;
-  private String deptNumber;
-  private String deptNote;
-  private Timestamp deptTime;
+  private String departmentNumber;
+  private String positionNumber;
+  private String mobilizeNote;
+  private Timestamp mobilizeTime;
   private Integer mobilizeState;
 
 
@@ -39,12 +40,12 @@ public class TPmMobilize {
   }
 
 
-  public String getUserName() {
-    return userName;
+  public String getUserName2() {
+    return userName2;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  public void setUserName2(String userName2) {
+    this.userName2 = userName2;
   }
 
 
@@ -75,32 +76,37 @@ public class TPmMobilize {
   }
 
 
-  public String getDeptNumber() {
-    return deptNumber;
+  public String getDepartmentNumber() {
+    return departmentNumber;
   }
 
-  public void setDeptNumber(String deptNumber) {
-    this.deptNumber = deptNumber;
+  public void setDepartmentNumber(String departmentNumber) {
+    this.departmentNumber = departmentNumber;
   }
 
-
-  public String getDeptNote() {
-    return deptNote;
+  public String getPositionNumber() {
+    return positionNumber;
   }
 
-  public void setDeptNote(String deptNote) {
-    this.deptNote = deptNote;
+  public void setPositionNumber(String positionNumber) {
+    this.positionNumber = positionNumber;
   }
 
-
-  public Timestamp getDeptTime() {
-    return deptTime;
+  public String getMobilizeNote() {
+    return mobilizeNote;
   }
 
-  public void setDeptTime(Timestamp deptTime) {
-    this.deptTime = deptTime;
+  public void setMobilizeNote(String mobilizeNote) {
+    this.mobilizeNote = mobilizeNote;
   }
 
+  public Timestamp getMobilizeTime() {
+    return mobilizeTime;
+  }
+
+  public void setMobilizeTime(Timestamp mobilizeTime) {
+    this.mobilizeTime = mobilizeTime;
+  }
 
   public Integer getMobilizeState() {
     return mobilizeState;
@@ -110,4 +116,40 @@ public class TPmMobilize {
     this.mobilizeState = mobilizeState;
   }
 
+
+
+
+
+  private TPmUser tPmUser;
+
+  public TPmUser gettPmUser() {
+    return tPmUser;
+  }
+
+  public void settPmUser(TPmUser tPmUser) {
+    this.tPmUser = tPmUser;
+  }
+
+
+  private TPmDepartment tPmDepartment;
+
+  public TPmDepartment gettPmDepartment() {
+    return tPmDepartment;
+  }
+
+  public void settPmDepartment(TPmDepartment tPmDepartment) {
+    this.tPmDepartment = tPmDepartment;
+  }
+
+
+  private TPmPosition tPmPosition;
+
+
+  public TPmPosition gettPmPosition() {
+    return tPmPosition;
+  }
+
+  public void settPmPosition(TPmPosition tPmPosition) {
+    this.tPmPosition = tPmPosition;
+  }
 }
