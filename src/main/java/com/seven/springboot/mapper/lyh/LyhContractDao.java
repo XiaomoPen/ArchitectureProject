@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface LyhContractDao {
     //
-    @Select("select * from t_pm_contract")
+
     public List<TPmContract> findAll();
 
     public Integer addContract(TPmContract tPmContract);

@@ -8,8 +8,10 @@ import com.seven.springboot.pojo.TPmContract;
 import com.seven.springboot.pojo.TPmPositive;
 import com.seven.springboot.pojo.TPmUser;
 import com.seven.springboot.service.lyh.impl.LyhPositiveService;
+import com.seven.springboot.utils.RandomNumber;
 import com.seven.springboot.utils.RestContent;
 import com.seven.springboot.utils.ReturnContent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -27,6 +29,8 @@ public class LyhPositiveController {
     @Resource
     private ReturnContent returnContent;
 
+    @Autowired
+    private RandomNumber randomNumber;
 
     @RequestMapping("find-positive")
     public RestContent tpmPositive(Integer pageNum, Integer size) {
@@ -55,6 +59,7 @@ public class LyhPositiveController {
 
     @PostMapping("add-positive")
     public RestContent addPositive(@RequestBody TPmPositive tPmPositive){
+            tPmPositive.setPositiveSerial(randomNumber.getRandom());
         Integer integer = bs.addPositive(tPmPositive);
         return returnContent.getContent(integer,"成功","失败");
     }

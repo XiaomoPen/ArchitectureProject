@@ -7,8 +7,10 @@ import com.github.pagehelper.PageHelper;
 import com.seven.springboot.pojo.TPmDeparture;
 import com.seven.springboot.pojo.TPmUser;
 import com.seven.springboot.service.lyh.impl.LyhDepartureService;
+import com.seven.springboot.utils.RandomNumber;
 import com.seven.springboot.utils.RestContent;
 import com.seven.springboot.utils.ReturnContent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +31,8 @@ public class LyhDepartureController {
     @Resource
     private ReturnContent returnContent;
 
+    @Autowired
+    private RandomNumber randomNumber;
 
 
     @RequestMapping("find-departure")
@@ -46,6 +50,7 @@ public class LyhDepartureController {
 
     @RequestMapping("find-departure2")
     public RestContent tpmUser2(Integer pageNum, Integer size,String search) {
+        System.out.println(search);
         TPmDeparture s = JSONObject.toJavaObject(JSON.parseObject(search), TPmDeparture.class);
 
         Map<String, Object> map = new HashMap<>();
@@ -71,6 +76,8 @@ public class LyhDepartureController {
 
     @PostMapping("add-departure")
     public RestContent addDeparture(@RequestBody TPmDeparture departure){
+
+        departure.setDepartureErial(randomNumber.getOrder());
         Integer integer = bs.addDeparture(departure);
         return returnContent.getContent(integer,"成功","失败");
     }

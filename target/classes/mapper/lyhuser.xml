@@ -23,7 +23,7 @@
 
         <association property="tPmPosition" javaType="com.seven.springboot.pojo.TPmPosition">
             <id column="position_number" property="positionNumber"></id>
-            <result property="position_name" column="positionName"></result>
+            <result column="position_name" property="positionName"></result>
             <result column="position_time" property="positionTime"></result>
             <result column="user_number" property="userNumber"></result>
         </association>
@@ -72,7 +72,8 @@
     </select>
     <select id="findAll" resultMap="find2">
         select * from t_pm_user a
-                          left join t_pm_department b on a.department_number =b.department_number
                           left join t_pm_position c on a.position_number=c.position_number
+                          left join t_pm_department b on a.department_number =b.department_number
+
     </select>
 </mapper>

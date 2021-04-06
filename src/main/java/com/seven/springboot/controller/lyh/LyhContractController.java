@@ -7,8 +7,10 @@ import com.github.pagehelper.PageHelper;
 import com.seven.springboot.pojo.TPmContract;
 import com.seven.springboot.pojo.TPmUser;
 import com.seven.springboot.service.lyh.impl.LyhContractService;
+import com.seven.springboot.utils.RandomNumber;
 import com.seven.springboot.utils.RestContent;
 import com.seven.springboot.utils.ReturnContent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,6 +27,10 @@ public class LyhContractController {
 
     @Resource
     private ReturnContent returnContent;
+
+    @Autowired
+    private RandomNumber randomNumber;
+
 
     @RequestMapping("find-Contract")
     public RestContent tpmUser(Integer pageNum, Integer size) {
@@ -63,6 +69,7 @@ public class LyhContractController {
     @PostMapping("add-content")
     public RestContent addContent(@RequestBody TPmContract tPmContract){
 
+        tPmContract.setContractNumber(randomNumber.getRandom());
         Integer integer = bs.addContract(tPmContract);
         return returnContent.getContent(integer,"成功","失败");
 

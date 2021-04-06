@@ -1,7 +1,10 @@
 package com.seven.springboot.pojo;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Timestamp;
 
 @Data
@@ -19,7 +22,7 @@ public class TPmContract {
   private Timestamp contractSigning;
   private Timestamp contractEffect;
   private Timestamp contractFailure;
-
+  private Timestamp contactJieshu;
 
   public String getContractNumber() {
     return contractNumber;
@@ -83,7 +86,17 @@ public class TPmContract {
     this.contractPositive = contractPositive;
   }
 
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+  public Timestamp getContactJieshu() {
+    return contactJieshu;
+  }
 
+  public void setContactJieshu(Timestamp contactJieshu) {
+    this.contactJieshu = contactJieshu;
+  }
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   public Timestamp getContractSigning() {
     return contractSigning;
   }
@@ -92,7 +105,8 @@ public class TPmContract {
     this.contractSigning = contractSigning;
   }
 
-
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   public Timestamp getContractEffect() {
     return contractEffect;
   }
@@ -101,7 +115,8 @@ public class TPmContract {
     this.contractEffect = contractEffect;
   }
 
-
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   public Timestamp getContractFailure() {
     return contractFailure;
   }

@@ -63,16 +63,23 @@ public class LyhuserController {
         System.out.println(pmUser);
 
 
-
         Integer adduser = bs.adduser(pmUser);
         return returnContent.getContent(adduser,"成功","失败");
 
     }
 
+    @RequestMapping("find-userList")
+    public RestContent tpmUserList() {
+        List<TPmUser> all = bs.findAll();
+        return returnContent.getContent(all,"返回成功","返回失败");
 
-    @GetMapping("find-userId")
-    public RestContent findById( String userNumber){
+    }
 
+
+
+    @RequestMapping("find-userId")
+    public RestContent findById(String userNumber){
+        System.out.println(userNumber);
         List<TPmUser> byUserNumber = bs.findByUserNumber(userNumber);
         return returnContent.getContent(byUserNumber,"成功","失败");
     }
