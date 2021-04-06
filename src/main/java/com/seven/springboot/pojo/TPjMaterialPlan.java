@@ -1,4 +1,7 @@
 package com.seven.springboot.pojo;
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,9 +18,11 @@ public class TPjMaterialPlan {
   private String planName;
   private String planPerson;
   private String planMask;
+  @JSONField(format = "yyyy年MM月dd日 HH:mm:ss")
   private Timestamp planDate;
   private Integer planApproval;
   private Integer planType;
+  private String planSource;
 
 
   public String getPlanNumber() {

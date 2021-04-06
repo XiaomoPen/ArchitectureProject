@@ -1,4 +1,5 @@
 package com.seven.springboot.pojo;
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,10 +11,13 @@ import java.sql.Timestamp;
 public class TPjMaterialContractDetailed {
 
   private String contractNumber;
+  @JSONField(format = "yyyy年MM月dd日")
   private Timestamp contractAwardTime;
   private String contractName;
   private String contractType;
+  @JSONField(format = "yyyy年MM月dd日")
   private Timestamp contractStartTime;
+  @JSONField(format = "yyyy年MM月dd日")
   private Timestamp contractEndTime;
   private double contractMoney;
   private String contractMoneyMax;
