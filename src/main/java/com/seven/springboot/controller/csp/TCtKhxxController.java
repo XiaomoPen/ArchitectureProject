@@ -45,10 +45,9 @@ public class TCtKhxxController {
     }
 
     //根据登录的员工ID来查询负责的客户，返回给客户信息列表
-
     @GetMapping("/queryIdAll")
     public RestContent queryIdAll(String userNumber){
-        /*userNumber="20210405";*/
+        userNumber="20210405";
         List<TCtKhxx> tCtKhxxes = tCtKhxxService.queryIdAll(userNumber);
         return returnContent.getContent(tCtKhxxes,"查询成功","error");
     }
@@ -76,8 +75,13 @@ public class TCtKhxxController {
             //时间参数查询
             List<TCtKhxx> tCtKhxxes = tCtKhxxService.sj(tCtKhxx.getKhxxLrsj());
             return returnContent.getContent(tCtKhxxes,"查询成功","error");
-        }else {
+        }else if(tCtKhxx.getKhxxLrsj()==null&&tCtKhxx.getKhxxXm()==""){
             //名字参数查询
+            List<TCtKhxx> tCtKhxxes = tCtKhxxService.queryNullAll();
+            return returnContent.getContent(tCtKhxxes,"查询成功","error");
+        }else {
+            //空白查询
+
             List<TCtKhxx> tCtKhxxes = tCtKhxxService.querymhcx(tCtKhxx.getKhxxXm());
             return returnContent.getContent(tCtKhxxes,"查询成功","error");
         }
