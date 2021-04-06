@@ -1,11 +1,13 @@
 package com.seven.springboot.controller.csp;
 
+import com.alibaba.fastjson.JSON;
 import com.seven.springboot.pojo.TCtKhxx;
 import com.seven.springboot.service.csp.TCtKhxxService;
 import com.seven.springboot.service.csp.impl.TCtKhxxServiceImpl;
 import com.seven.springboot.utils.RestContent;
 import com.seven.springboot.utils.ReturnContent;
 import com.seven.springboot.utils.impl.RandomNumberImpl;
+import org.omg.CORBA.DATA_CONVERSION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +26,7 @@ public class TCtKhxxController {
     private TCtKhxxServiceImpl tCtKhxxService;
     @Autowired
     private ReturnContent returnContent;
-
+    @Autowired
     private RandomNumberImpl randomNumber;
 
     //查询全部客户信息列表
@@ -61,18 +63,22 @@ public class TCtKhxxController {
     }
     //新增信息
 
-    @PostMapping ("/addKhxx")
-    public RestContent addKhxx(@RequestBody TCtKhxx tCtKhxx){
+    @RequestMapping ("/addKhxx/{khxx}")
+    public RestContent addKhxx(@PathVariable String khxx){
         //录入当天添加的系统时间
         /*SimpleDateFormat sj=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date=new Date();*/
-        String order = randomNumber.getOrder();
-        tCtKhxx.setKhxxBh(order);
-        tCtKhxx.setKhxxXm("中中中中");
-        tCtKhxx.setKhxxLrsj(new Timestamp(new Date().getTime()));
+        /*System.out.println(khxx);*/
+        TCtKhxx tCtKhxx= JSON.parseObject(khxx, TCtKhxx.class);
+        String random = randomNumber.getRandom();//随机编号
+        tCtKhxx.setKhxxBh(random);
+        if (tCtKhxx.getUserNumber().equals("")){
+            tCtKhxx.setUserNumber(null);}//前台员工id为空白时，设置为null添加
+        tCtKhxx.setKhxxLrsj(new Timestamp(new Date().getTime()));//当前系统时间
         System.out.println(tCtKhxx.toString());
-        Integer integer=tCtKhxxService.addKhxx(tCtKhxx);
-        return returnContent.getContent(integer,"新增成功","error");
+        tCtKhxxService.addKhxx(tCtKhxx);
+        System.out.println(random);
+        return returnContent.getContent(tCtKhxx,"新增成功","error");
     }
 
     @RequestMapping("/delKhxx")
