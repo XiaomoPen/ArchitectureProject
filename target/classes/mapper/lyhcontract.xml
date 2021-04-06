@@ -7,6 +7,7 @@
         <result column="contract_leix" property="contractLeix"></result>
         <result column="contract_state" property="contractState"></result>
         <result column="contract_sy" property="contractSy"></result>
+        <result column="contract_jieshu" property="contactJieshu"></result>
         <result column="contract_positive" property="contractPositive"></result>
         <result column="contract_signing" property="contractSigning"></result>
         <result column="contract_effect" property="contractEffect"></result>
@@ -36,7 +37,7 @@
 
             <association property="tPmPosition" javaType="com.seven.springboot.pojo.TPmPosition">
                 <id column="position_number" property="positionNumber"></id>
-                <result property="position_name" column="positionName"></result>
+                <result  column="position_name" property="positionName"></result>
                 <result column="position_time" property="positionTime"></result>
                 <result column="user_number" property="userNumber"></result>
             </association>
@@ -44,6 +45,16 @@
         </association>
 
     </resultMap>
+
+    <select id="findAll" resultMap="allContract">
+        select * from t_pm_contract a
+                          left JOIN t_pm_user b on a.user_number=b.user_number
+                          LEFT JOIN t_pm_position c on b.position_number=c.position_number
+                          LEFT JOIN t_pm_department d on b.department_number=d.department_number
+
+    </select>
+
+
 
     <select id="gj" resultMap="allContract">
         select * from t_pm_contract a
@@ -64,10 +75,10 @@
         insert  into t_pm_contract(contract_number,user_number,
         contract_name,contract_leix,contract_state,contract_sy,
         contract_positive,contract_signing,
-        contract_effect,contract_failure) values(
-              #{contractNumber},#{userNumber},#{contractName},
+        contract_effect,contract_failure,contract_jieshu) values(
+              #{contractNumber},#{userNumber},#{contractName},#{contractLeix},
             #{contractState},#{contractSy},#{contractPositive},
-            #{contractSigning},#{contractEffect},#{contractEffect},#{contractFailure})
+            #{contractSigning},#{contractEffect},#{contractFailure},#{contactJieshu})
     </insert>
 
 <delete id="delContract">

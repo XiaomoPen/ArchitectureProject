@@ -11,7 +11,7 @@ public class TPmMobilize {
 
   private String mobilizeSerial;
   private String userNumber;
-  private String userName;
+  private String userName2;
   private String mobilizeLeix;
   private String mobilizeDept;
   private String mobilizeGw;
@@ -40,12 +40,12 @@ public class TPmMobilize {
   }
 
 
-  public String getUserName() {
-    return userName;
+  public String getUserName2() {
+    return userName2;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  public void setUserName2(String userName2) {
+    this.userName2 = userName2;
   }
 
 

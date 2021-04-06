@@ -1,0 +1,12 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.springboot.mapper.pht.MaterialContractDao">
+    <!--    批量新增材料明细表-->
+    <insert id="addClcrkmx" parameterType="java.util.List">
+        insert into t_pj_clcrkmx values
+        <foreach collection="list" item="item" index="index" open=" " separator="," close=" ">
+            (#{item.clcrkNumber},#{item.clcrkmxName},#{item.clcrkmxNumber},#{item.clcrkmxCompany},#{item.clcrkmxWarehouse},#{item.clcrkmxSum},#{item.clcrkmxIncluded},#{item.clcrkmxNoIncluded},#{item.clcrkmxTaxRate},#{item.clcrkmxNoMoney},#{item.clcrkmxMoney})
+        </foreach>
+    </insert>
+</mapper>

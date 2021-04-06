@@ -32,7 +32,7 @@
 
     <association property="tPmPosition" javaType="com.seven.springboot.pojo.TPmPosition">
         <id column="position_number" property="positionNumber"></id>
-        <result property="position_name" column="positionName"></result>
+        <result column="position_name" property="positionName"></result>
         <result column="position_time" property="positionTime"></result>
         <result column="user_number" property="userNumber"></result>
     </association>

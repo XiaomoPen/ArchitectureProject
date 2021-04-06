@@ -36,6 +36,8 @@
             <result column="user_number" property="userNumber"></result>
         </association>
 
+
+
     </resultMap>
 
     <select id="findAll" resultMap="findAll">
