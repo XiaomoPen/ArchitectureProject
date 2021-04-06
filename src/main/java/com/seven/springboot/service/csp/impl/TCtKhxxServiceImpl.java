@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
 import java.util.List;
 @Service
 public class TCtKhxxServiceImpl implements TCtKhxxService {
@@ -35,7 +36,17 @@ public class TCtKhxxServiceImpl implements TCtKhxxService {
          tCtKhxxDao.addKhxx(tCtKhxx);
     }
 
-    public Integer delKhxx(String khxxBh) {
-        return tCtKhxxDao.delKhxx(khxxBh);
+    public void delKhxx(String khxxBh) {
+         tCtKhxxDao.delKhxx(khxxBh);
+    }
+
+    @Override
+    public List<TCtKhxx> mhcxsj(String khxxXm, Timestamp khxxLrsj) {
+        return tCtKhxxDao.mhcxsj(khxxXm,khxxLrsj);
+    }
+
+    @Override
+    public List<TCtKhxx> sj(Timestamp khxxLrsj) {
+        return tCtKhxxDao.sj(khxxLrsj);
     }
 }

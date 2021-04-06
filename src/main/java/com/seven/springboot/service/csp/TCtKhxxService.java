@@ -4,6 +4,7 @@ import com.seven.springboot.pojo.TCtKhxx;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -19,6 +20,10 @@ public interface TCtKhxxService {
 
     public void addKhxx(TCtKhxx tCtKhxx);
 
-    public Integer delKhxx(String khxxBh);
+    public void delKhxx(String khxxBh);
+
+    public List<TCtKhxx> mhcxsj(String khxxXm,Timestamp khxxLrsj);
+
+    public List<TCtKhxx> sj(Timestamp khxxLrsj);
 
 }
