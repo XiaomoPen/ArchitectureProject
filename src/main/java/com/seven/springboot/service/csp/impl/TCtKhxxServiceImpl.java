@@ -31,8 +31,8 @@ public class TCtKhxxServiceImpl implements TCtKhxxService {
         return tCtKhxxDao.querymhcx(khxxXm);
     }
     //新增信息
-    public Integer addKhxx(TCtKhxx tCtKhxx) {
-        return tCtKhxxDao.addKhxx(tCtKhxx);
+    public void addKhxx(TCtKhxx tCtKhxx) {
+         tCtKhxxDao.addKhxx(tCtKhxx);
     }
 
     public Integer delKhxx(String khxxBh) {

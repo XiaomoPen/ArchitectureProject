@@ -30,7 +30,7 @@ public interface TCtKhxxDao {
     //新增信息
     @Insert("insert into t_ct_khxx (khxx_bh, khxx_xm, khxx_khlx, khxx_khhy, khxx_khly, khxx_khdj, khxx_khdh, khxx_lrsj, user_number, user_mc)value " +
             "(#{khxxBh},#{khxxXm},#{khxxKhlx},#{khxxKhhy},#{khxxKhly},#{khxxKhdj},#{khxxKhdh},#{khxxLrsj},#{userNumber},#{userMc})")
-    public Integer addKhxx(TCtKhxx tCtKhxx);
+    public void addKhxx(TCtKhxx tCtKhxx);
 
     //根据编号删除数据
     @Delete("delete from t_ct_khxx where khxx_bh = #{khxxBh} ")

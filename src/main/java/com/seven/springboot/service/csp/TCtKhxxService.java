@@ -17,7 +17,7 @@ public interface TCtKhxxService {
 
     public List<TCtKhxx> querymhcx(String khxxXm);
 
-    public Integer addKhxx(TCtKhxx tCtKhxx);
+    public void addKhxx(TCtKhxx tCtKhxx);
 
     public Integer delKhxx(String khxxBh);
 
