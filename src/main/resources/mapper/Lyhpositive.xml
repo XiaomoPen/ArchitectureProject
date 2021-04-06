@@ -1,0 +1,67 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.springboot.mapper.lyh.LyhPonsitiveDao">
+    <resultMap id="findAll" type="com.seven.springboot.pojo.TPmPositive">
+        <id column="positive_serial" property="positiveSerial"></id>
+        <result column="user_number" property="userNumber"></result>
+        <result column="positive_time" property="positiveTime"></result>
+        <result column="positive_sqpositive" property="postiveSqpositive"></result>
+        <result column="positive_note" property="positiveNote"></result>
+        <result column="positive_state" property="positiveState"></result>
+
+
+
+        <association property="tPmUser" javaType="com.seven.springboot.pojo.TPmUser">
+            <id column="user_number" property="userNumber"></id>
+            <result column="user_Jobnumber" property="userJobNumber"></result>
+            <result column="user_name" property="userName"></result>
+            <result column="user_sex" property="userSex"></result>
+            <result column="user_birthday" property="userBirthday"></result>
+            <result column="user_intime" property="userIntime"></result>
+            <result column="user_positive" property="userPositive"></result>
+            <result column="user_departure" property="userDeparture"></result>
+            <result column="position_number" property="positionNumber"></result>
+            <result column="department_number" property="departmentNumber"></result>
+            <result column="user_state" property="userState"></result>
+        </association>
+    </resultMap>
+
+
+    <select id="findAll" resultMap="findAll">
+        select * from t_pm_positive a
+        left join t_pm_user b on a.user_number=b.user_number
+
+    </select>
+
+    <insert id="addPositive">
+        insert into t_pm_positive(positive_serial,user_number,
+            positive_time,positive_sqpositive,
+            positiveNote,positiveState)  values(#{positiveSerial},
+            #{userNumber},#{positiveTime},#{postiveSqpositive},#{positiveNote},0)
+
+    </insert>
+
+
+    <select id="findAll2" resultMap="findAll">
+        select * from t_pm_positive a
+                          left join t_pm_user b on a.user_number=b.user_number
+        <where>
+            <if test="tPmUser.userName !=null and tPmUser.userName !=''">
+                and b.user_name like '%${tPmUser.userName}%'
+            </if>
+            <if test="positiveState !=null and positiveState !=''">
+                and a.positive_state='%${positiveState}%'
+            </if>
+        </where>
+    </select>
+
+    <insert id="addMyapply" >
+        Insert into t_ps_myapply(myapply_num,myapply_number,myapply_name,
+            myapply_state,myapply_type,user_number) values
+        ( #{positiveSerial},’转正’,0,’转正申请’,#{userName})
+
+    </insert>
+
+        <delete id="delPositive">
+            Delete from t_pm_positive where positive_serial =#{positiveSerial}
+        </delete>
+</mapper>

@@ -33,7 +33,7 @@ public class XmkcController {
         TPjXmkc tPjXmkc = JSON.parseObject(date, TPjXmkc.class);
         //获取随机生成的编号
         String random = randomNumber.getRandom();
-        tPjXmkc.setTbxxBh(random);
+        tPjXmkc.setXmkcBh(random);
         System.out.println(tPjXmkc.toString());
         xmckService.add(tPjXmkc);
         TPjXmkc xmkc = null;
