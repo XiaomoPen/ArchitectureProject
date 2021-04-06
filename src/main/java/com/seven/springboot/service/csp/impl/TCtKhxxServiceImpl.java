@@ -4,9 +4,11 @@ import com.seven.springboot.mapper.csp.TCtKhxxDao;
 import com.seven.springboot.pojo.TCtKhxx;
 import com.seven.springboot.service.csp.TCtKhxxService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
-
+@Service
 public class TCtKhxxServiceImpl implements TCtKhxxService {
 
     @Autowired
@@ -24,12 +26,16 @@ public class TCtKhxxServiceImpl implements TCtKhxxService {
     public List<TCtKhxx> queryIdAll(String userNumber) {
         return tCtKhxxDao.queryIdAll(userNumber);
     }
-    //模糊查询客户名称或负责人名称,时间降序排列并且无负责人编号
+    //模糊查询客户名称或负责人名称,时间降序排列
     public List<TCtKhxx> querymhcx(String khxxXm) {
         return tCtKhxxDao.querymhcx(khxxXm);
     }
     //新增信息
     public Integer addKhxx(TCtKhxx tCtKhxx) {
         return tCtKhxxDao.addKhxx(tCtKhxx);
+    }
+
+    public Integer delKhxx(String khxxBh) {
+        return tCtKhxxDao.delKhxx(khxxBh);
     }
 }

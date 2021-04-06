@@ -19,4 +19,6 @@ public interface TCtKhxxService {
 
     public Integer addKhxx(TCtKhxx tCtKhxx);
 
+    public Integer delKhxx(String khxxBh);
+
 }
