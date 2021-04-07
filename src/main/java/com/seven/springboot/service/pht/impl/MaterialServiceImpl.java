@@ -5,6 +5,7 @@ import com.seven.springboot.pojo.TPjMaterialContractDetailed;
 import com.seven.springboot.pojo.TPjMaterialPlan;
 import com.seven.springboot.pojo.TPjMaterialPlanDetailed;
 import com.seven.springboot.service.pht.MaterialService;
+import com.seven.springboot.vo.pht.MaterialVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,6 +66,16 @@ public class MaterialServiceImpl implements MaterialService {
 
     public List<TPjMaterialPlan> getMaterialPlansByApprovalOrType(Integer approval, Integer type) {
         return materialDao.getMaterialPlansByApprovalOrType(approval,type);
+    }
+
+    @Override
+    public MaterialVo getMaterialPlanByNumber(String number) {
+        TPjMaterialPlan pjMaterialPlan = materialDao.getMaterialPlanByNumber(number);
+        List<TPjMaterialPlanDetailed> detailedByNumber = materialDao.getMaterialPlanDetailedByNumber(number);
+        MaterialVo materialVo=new MaterialVo();
+        materialVo.setPlans(pjMaterialPlan);
+        materialVo.setDetaileds(detailedByNumber);
+        return materialVo;
     }
 
 }

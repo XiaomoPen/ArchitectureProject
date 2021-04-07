@@ -116,4 +116,10 @@ public class MaterialController {
         List<TPjMaterialPlan> materials = materialService.getMaterialPlansByApprovalOrType(2, 1);
         return returnContent.getContent(materials,"获取数据成功","获取数据失败");
     }
+    //通过计划编号获取对应数据信息
+    @GetMapping("/getMaterialByNumber/{number}")
+    public RestContent getMaterialByNumber(@PathVariable String number){
+        MaterialVo materialPlanByNumber = materialService.getMaterialPlanByNumber(number);
+        return returnContent.getContent(JSON.toJSONString(materialPlanByNumber),"获取数据成功","获取数据失败");
+    }
 }

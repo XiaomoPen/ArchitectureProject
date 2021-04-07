@@ -29,4 +29,7 @@ public interface MaterialContractService {
 
     //删除材料合同
     public void delMaterialConntract(String number);
+
+    //通过材料编号获取材料合同
+    public MaterialContractVo getMaterialContractVo(String number);
 }

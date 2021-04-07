@@ -48,4 +48,11 @@ public interface MaterialDao {
     @Select("select * from t_pj_materialPlan where plan_approval=#{approval} and plan_type=#{type}")
     public List<TPjMaterialPlan> getMaterialPlansByApprovalOrType(@Param("approval") Integer approval,@Param("type") Integer type);
 
+    //通过计划id获取计划信息
+    @Select("select * from t_pj_materialPlan where plan_number=#{number}")
+    public TPjMaterialPlan getMaterialPlanByNumber(@Param("number") String number);
+
+    //通过计划id获取计划明细信息
+    @Select("select * from t_pj_materialPlanDetailed where plan_number=#{number}")
+    public List<TPjMaterialPlanDetailed> getMaterialPlanDetailedByNumber(@Param("number") String number);
 }

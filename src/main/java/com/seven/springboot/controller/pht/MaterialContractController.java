@@ -43,7 +43,7 @@ public class MaterialContractController {
         List<TPjClcrkmx> clcrkmxs = contractVo.getClcrkmxs();
         for(int i=0;i<clcrkmxs.size();i++){
             TPjClcrkmx tPjClcrkmx = clcrkmxs.get(i);
-            tPjClcrkmx.setClcrkNumber(number);
+            tPjClcrkmx.setClcrkmxNumber(number);
             clcrkmxs.set(i,tPjClcrkmx);
         }
         contractVo.setClcrkmxs(clcrkmxs);
@@ -93,4 +93,12 @@ public class MaterialContractController {
         contractService.delMaterialConntract(number);
         return returnContent.getContent(1,"合同删除申请发起成功","数据删除申请发起失败");
     }
+
+    //通过材料编号获取材料合同
+    @GetMapping("/getMCvo/{number}")
+    public RestContent getMaterialContractVo(@PathVariable String number){
+        MaterialContractVo contractVo = contractService.getMaterialContractVo(number);
+        return returnContent.getContent(contractVo,"获取数据成功","获取数据失败");
+    }
+
 }

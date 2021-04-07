@@ -49,4 +49,16 @@ public interface MaterialContractDao {
     //删除材料合同明细表
     @Delete("delete from t_pj_clcrkmx where clcrk_number=#{number}")
     public void delClcrkmxbyNumber(@Param("number") String number);
+
+    //通过材料合同编号获取该材料信息
+    @Select("select * from t_pj_materialContract where contract_number=#{number}")
+    public TPjMaterialContract getContractByNumber(@Param("number") String  number);
+
+    //通过材料合同编号获取该材料详细信息
+    @Select("select * from t_pj_materialContractDetailed where contract_number=#{number}")
+    public TPjMaterialContractDetailed getContractDetailedByNumber(@Param("number") String  number);
+
+    //通过材料合同编号获取该材料明细信息
+    @Select("select * from t_pj_clcrkmx where clcrkmx_number=#{number}")
+    public List<TPjClcrkmx> getClcrkmxByNumber(@Param("number") String  number);
 }
