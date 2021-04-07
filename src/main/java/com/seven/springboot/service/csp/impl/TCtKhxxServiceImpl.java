@@ -2,6 +2,7 @@ package com.seven.springboot.service.csp.impl;
 
 import com.seven.springboot.mapper.csp.TCtKhxxDao;
 import com.seven.springboot.pojo.TCtKhxx;
+import com.seven.springboot.pojo.TPmUser;
 import com.seven.springboot.service.csp.TCtKhxxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,22 +32,32 @@ public class TCtKhxxServiceImpl implements TCtKhxxService {
     public List<TCtKhxx> querymhcx(String khxxXm) {
         return tCtKhxxDao.querymhcx(khxxXm);
     }
-    //新增信息
+    //新增信息客户信息
     public void addKhxx(TCtKhxx tCtKhxx) {
          tCtKhxxDao.addKhxx(tCtKhxx);
     }
-
+    //根据编号删除数据客户信息
     public void delKhxx(String khxxBh) {
          tCtKhxxDao.delKhxx(khxxBh);
     }
-
-    @Override
+    //查询客户名称或负责人名称，并在录入时间之前，时间降序排列
     public List<TCtKhxx> mhcxsj(String khxxXm, Timestamp khxxLrsj) {
         return tCtKhxxDao.mhcxsj(khxxXm,khxxLrsj);
     }
-
-    @Override
+    //查询录入时间之前,时间降序排列
     public List<TCtKhxx> sj(Timestamp khxxLrsj) {
         return tCtKhxxDao.sj(khxxLrsj);
+    }
+
+    @Override
+    //查询全部员工信息列表，用于前台搜索员工id和员工名称
+    public List<TPmUser> scuser() {
+        return tCtKhxxDao.scuser();
+    }
+
+    @Override
+    //用于后台接受到userNumber，查询取出对象的属性
+    public List<TPmUser> scuserid(String userNumber) {
+        return tCtKhxxDao.scuserid(userNumber);
     }
 }
