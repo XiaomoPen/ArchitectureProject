@@ -58,4 +58,16 @@ public class MaterialContractServiceImpl implements MaterialContractService {
         contractDao.delMCDbyNumber(number);
         contractDao.delMCbyNumber(number);
     }
+
+    @Override
+    public MaterialContractVo getMaterialContractVo(String number) {
+        TPjMaterialContract contract = contractDao.getContractByNumber(number);
+        TPjMaterialContractDetailed contractDetailed = contractDao.getContractDetailedByNumber(number);
+        List<TPjClcrkmx> clcrkmxes = contractDao.getClcrkmxByNumber(number);
+        MaterialContractVo materialContractVo=new MaterialContractVo();
+        materialContractVo.setContract(contract);
+        materialContractVo.setDetailed(contractDetailed);
+        materialContractVo.setClcrkmxs(clcrkmxes);
+        return materialContractVo;
+    }
 }

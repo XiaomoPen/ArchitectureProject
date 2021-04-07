@@ -3,6 +3,7 @@ package com.seven.springboot.service.pht;
 import com.seven.springboot.pojo.TPjMaterialContractDetailed;
 import com.seven.springboot.pojo.TPjMaterialPlan;
 import com.seven.springboot.pojo.TPjMaterialPlanDetailed;
+import com.seven.springboot.vo.pht.MaterialVo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
@@ -34,4 +35,7 @@ public interface MaterialService {
 
     //通过的审批进度与材料分类获取材料计划
     public List<TPjMaterialPlan> getMaterialPlansByApprovalOrType(Integer approval,Integer type);
+
+    //通过计划编号获取对应数据信息
+    public MaterialVo getMaterialPlanByNumber(String number);
 }

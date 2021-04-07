@@ -10,8 +10,6 @@ import com.seven.springboot.utils.RestContent;
 import com.seven.springboot.utils.ReturnContent;
 import com.seven.springboot.vo.pht.MaterialContractInfoVo;
 import com.seven.springboot.vo.pht.MaterialContractVo;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -95,4 +93,12 @@ public class MaterialContractController {
         contractService.delMaterialConntract(number);
         return returnContent.getContent(1,"合同删除申请发起成功","数据删除申请发起失败");
     }
+
+    //通过材料编号获取材料合同
+    @GetMapping("/getMCvo/{number}")
+    public RestContent getMaterialContractVo(@PathVariable String number){
+        MaterialContractVo contractVo = contractService.getMaterialContractVo(number);
+        return returnContent.getContent(contractVo,"获取数据成功","获取数据失败");
+    }
+
 }

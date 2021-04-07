@@ -75,8 +75,6 @@ public class LyhuserController {
 
     }
 
-
-
     @RequestMapping("find-userId")
     public RestContent findById(String userNumber){
         System.out.println(userNumber);
