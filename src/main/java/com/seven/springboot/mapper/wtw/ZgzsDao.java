@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface ZgzsDao {
+public interface ZgzsDao {//中标
     //查询全部信息
     @Select("select * from t_pj_zgzs")
     public List<TPjZgzs> queryAll();

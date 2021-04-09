@@ -80,4 +80,23 @@ public class TPsMyapply {
     this.userNumber = userNumber;
   }
 
+  private TPmUser tPmUser;
+
+  public TPmUser gettPmUser() {
+    return tPmUser;
+  }
+
+  public void settPmUser(TPmUser tPmUser) {
+    this.tPmUser = tPmUser;
+  }
+
+  private TPsApply tPsApply;
+
+  public TPsApply gettPsApply() {
+    return tPsApply;
+  }
+
+  public void settPsApply(TPsApply tPsApply) {
+    this.tPsApply = tPsApply;
+  }
 }

@@ -9,14 +9,14 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface XmkcDao {
+public interface XmkcDao {//项目勘察
     //查询所有
     @Select("select * from t_pj_xmkc")
     public List<TPjXmkc> queryAll();
     //添加一条信息
     @Select("insert into t_pj_xmkc(xmkc_rq,xmkc_bh,xmkc_xmmc,\n" +
             "xmkc_cmlx,xmkc_jsdw,xmkc_cyry,xmkc_sqr,xmkc_kcqk,xmkc_bz,xmkc_spjg,tbxx_bh,user_number)" +
-            " values(#{xmkcRq},#{xmkcBh},#{xmkcXmmc},#{xmkcCmlx},#{xmkcJsdw},#{xmkcCyry},#{xmkcSqr},#{xmkcKcqk},#{xmkc  Bz}," +
+            " values(#{xmkcRq},#{xmkcBh},#{xmkcXmmc},#{xmkcCmlx},#{xmkcJsdw},#{xmkcCyry},#{xmkcSqr},#{xmkcKcqk},#{xmkcBz}," +
             "#{xmkcSpjg},#{tbxxBh},#{userNumber})")
     public void add(TPjXmkc tPjXmkc);
     //根据编号查询的一条数据

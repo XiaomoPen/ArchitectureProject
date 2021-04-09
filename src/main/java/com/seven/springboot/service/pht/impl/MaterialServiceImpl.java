@@ -30,6 +30,7 @@ public class MaterialServiceImpl implements MaterialService {
             return inte;
         }
         Integer integer1 = materialDao.addMaterialDetails(detaileds);
+        Class.forName("xxx");
         if (inte==null||integer1==null){
             throw new Exception("新增材料计划失败");
         }

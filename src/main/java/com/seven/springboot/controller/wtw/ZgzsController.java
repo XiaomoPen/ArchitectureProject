@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/zgzs")
-public class ZgzsController {
+public class ZgzsController {//中标自审
     @Autowired
     private ZgzsServiceImpl zgzsService;
     @Autowired

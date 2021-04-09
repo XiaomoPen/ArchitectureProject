@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/gys")
-public class GysController {
+public class GysController {//供应商
     @Autowired
     private ReturnContent returnContent;
     @Autowired
     private GysServiceImpl gysService;
+    //数据查询
     @GetMapping("/queryAll")
     public RestContent queryAll(){
         return returnContent.getContent(gysService.queryAll(),"数据传输成功！","数据传输失败！");

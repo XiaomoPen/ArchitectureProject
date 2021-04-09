@@ -2,6 +2,7 @@ package com.seven.springboot.service.pht.impl;
 
 import com.seven.springboot.mapper.pht.ClcrkDao;
 import com.seven.springboot.pojo.TPjClcrk;
+import com.seven.springboot.pojo.TPjClcrkmx;
 import com.seven.springboot.service.pht.ClcrlService;
 import com.seven.springboot.vo.pht.ClcrlDataVo;
 import com.seven.springboot.vo.pht.ClcrlVo;
@@ -28,7 +29,11 @@ public class ClcrlServiceImpl implements ClcrlService {
         if(null==integer||integer==0){
             return 0;
         }
-        return clcrkDao.beathAddClcrkms(clcrlVo.getClcrkmxes());
+        List<TPjClcrkmx> clcrkmxes = clcrlVo.getClcrkmxes();
+        if(null!=clcrkmxes&&clcrkmxes.size()>0){
+            return clcrkDao.beathAddClcrkms(clcrkmxes);
+        }
+        return 1;
     }
 
     @Override

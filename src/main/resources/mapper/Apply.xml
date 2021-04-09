@@ -1,0 +1,35 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.springboot.mapper.tyh.ApplyDao">
+    <resultMap id="apply" type="com.seven.springboot.pojo.TPsApply">
+        <id column="apply_num" property="applyNum"></id>
+        <result column="apply_type" property="applyType"></result>
+        <result column="user_number" property="userNumber"></result>
+        <result column="apply_date" property="applyDate"></result>
+        <result column="apply_time" property="applyTime"></result>
+        <result column="apply_number" property="applyNumber"></result>
+        <result column="apply_reason" property="applyReason"></result>
+        <result column="apply_theme" property="applyTheme"></result>
+        <result column="apply_datetime" property="applyDatetime"></result>
+    </resultMap>
+
+    <insert id="addapply">
+            insert into t_ps_apply(apply_num,apply_type,user_number,apply_date,
+            apply_time,apply_number,apply_reason) values(#{applyNum},#{applyType},#{userNumber},#{applyDate},
+            #{applyTime},#{applyNumber},#{applyReason})
+    </insert>
+
+    <insert id="addapplyjb">
+        insert into t_ps_apply(apply_num,user_number,apply_date,apply_time,apply_number,apply_type)
+        values(#{applyNum},#{userNumber},#{applyDate},#{applyTime},#{applyNumber},'加班')
+    </insert>
+
+    <insert id="addapplycc">
+        insert into t_ps_apply(apply_num,user_number,apply_date,apply_time,apply_number,apply_theme,apply_datetime,apply_reason,apply_type)
+         values(#{applyNum},#{userNumber},#{applyDate},#{applyTime},#{applyNumber},#{applyTheme},#{applyDatetime},#{applyReason},'出差')
+    </insert>
+
+    <insert id="addmyapply">
+        insert into t_ps_myapply(myapply_num,myapply_number,myapply_name,myapply_type,user_number)
+        values(#{myapplyNum},#{myapplyNumber},#{myapplyName},#{myapplyType},#{userNumber})
+    </insert>
+</mapper>

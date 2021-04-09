@@ -1,10 +1,14 @@
 package com.seven.springboot.pojo;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Timestamp;
 
-@Data
+
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class TPsApply {
@@ -12,10 +16,16 @@ public class TPsApply {
   private String applyNum;
   private String applyType;
   private String userNumber;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   private Timestamp applyDate;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   private Timestamp applyTime;
   private Integer applyNumber;
   private String applyReason;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   private String applyTheme;
   private Timestamp applyDatetime;
 
@@ -100,4 +110,23 @@ public class TPsApply {
     this.applyDatetime = applyDatetime;
   }
 
+  public TPsMyapply tPsMyapply;
+
+  public TPsMyapply gettPsMyapply() {
+    return tPsMyapply;
+  }
+
+  public void settPsMyapply(TPsMyapply tPsMyapply) {
+    this.tPsMyapply = tPsMyapply;
+  }
+
+  public TPmUser tPmUser;
+
+  public TPmUser gettPmUser() {
+    return tPmUser;
+  }
+
+  public void settPmUser(TPmUser tPmUser) {
+    this.tPmUser = tPmUser;
+  }
 }

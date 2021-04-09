@@ -3,6 +3,8 @@ package com.seven.springboot.controller.wtw;
 import com.alibaba.fastjson.JSON;
 import com.seven.springboot.pojo.TPjXmkc;
 import com.seven.springboot.pojo.TPjZgzs;
+import com.seven.springboot.pojo.TPmUser;
+import com.seven.springboot.service.lyh.impl.LyhUserService;
 import com.seven.springboot.service.wtw.impl.XmckServiceImpl;
 import com.seven.springboot.utils.RestContent;
 import com.seven.springboot.utils.ReturnContent;
@@ -14,13 +16,21 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/xmkc")
-public class XmkcController {
+public class XmkcController {//项目勘察
     @Autowired
     private XmckServiceImpl xmckService;
     @Autowired
     private ReturnContent returnContent;
     @Autowired
     private RandomNumberImpl randomNumber;
+    @Autowired
+    private LyhUserService lyhUserService;
+    //查询所有人员
+    @GetMapping("/userQuery")
+    public RestContent userQuery(){
+        List<TPmUser> tPmUsers = lyhUserService.findAll();
+        return returnContent.getContent(tPmUsers,"数据传输成功！","数据传输失败!");
+    }
     //信息查询所有
     @GetMapping("/queryAll")
     public RestContent queryAll(){

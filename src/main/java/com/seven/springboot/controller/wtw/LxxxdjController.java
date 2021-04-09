@@ -15,11 +15,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/lxxx")
-public class LxxxdjController {
+public class LxxxdjController {//立项信息
     @Autowired
     private LxxxdjServiceImpl lxxxdjService;
     @Autowired
     private ReturnContent returnContent;
+    //数据查询
     @GetMapping("/queryAll")
     public RestContent queryAll(){
         List<TPjLxxxdj> lxxxdjs = lxxxdjService.queryAll();

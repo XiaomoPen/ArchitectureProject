@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/zbwj")
-public class ZbwjController {
+public class ZbwjController {//招标文件
     @Autowired
     private ZbwjServiceImpl zbwjService;
     @Autowired

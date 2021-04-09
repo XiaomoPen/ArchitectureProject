@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tbxx")
-public class TbxxControllerr {
+public class TbxxControllerr {//投标信息
     @Autowired
     private TbxxServiceImpl tbxxService;
     @Autowired

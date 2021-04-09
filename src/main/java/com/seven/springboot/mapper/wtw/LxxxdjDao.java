@@ -9,7 +9,8 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface LxxxdjDao {
+public interface LxxxdjDao {//立项信息
+    //立项信息登记
     @Select("select * from t_pj_lxxxdj")
     public List<TPjLxxxdj> queryAll();
 

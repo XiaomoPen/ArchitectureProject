@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class GysServiceImpl implements GysService {
+public class GysServiceImpl implements GysService {//供应商
     @Autowired
     private GysDao gysDao;
-
+    //供应商信息查询
     public List<TPjGys> queryAll() {
         return gysDao.queryAll();
     }

@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * 投标文件审查
+ */
 @RestController
 @RequestMapping("/tbwjsc")
 public class TbwjscController {
@@ -45,7 +48,6 @@ public class TbwjscController {
     public void deletes(@PathVariable String serial){
         tbwjscService.delete(JSON.parseObject(serial, String.class));
     }
-
     //修改审批状态为待审批
     @GetMapping("/updates/{serial}")
     public void updates(@PathVariable String serial){

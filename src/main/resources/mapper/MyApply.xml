@@ -1,0 +1,60 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.springboot.mapper.tyh.MyapplyDao">
+    <resultMap id="myapply" type="com.seven.springboot.pojo.TPsMyapply">
+        <id column="myapply_num" property="myapplyNum"></id>
+        <result column="myapply_number" property="myapplyNumber"></result>
+        <result column="myapply_name" property="myapplyName"></result>
+        <result column="myapply_state" property="myapplyState"></result>
+        <result column="myapply_urge" property="myapplyUrge"></result>
+        <result column="myapply_type" property="myapplyType"></result>
+        <result column="user_number" property="userNumber"></result>
+        <association property="tPmUser" javaType="com.seven.springboot.pojo.TPmUser">
+            <id column="userNumber" property="userNumber"></id>
+            <result column="user_jobNumber" property="userJobNumber"></result>
+            <result column="user_name" property="userName"></result>
+            <result column="user_sex" property="userSex"></result>
+            <result column="user_birthday" property="userBirthday"></result>
+            <result column="user_intime" property="userIntime"></result>
+            <result column="user_positive" property="userPositive"></result>
+            <result column="user_departure" property="userDeparture"></result>
+            <result column="position_number" property="positionNumber"></result>
+            <result column="department_number" property="departmentNumber"></result>
+            <result column="user_state" property="userState"></result>
+<!--            <association property="tPmDepartures" javaType="com.seven.springboot.pojo.TPmDepartment">-->
+<!--                -->
+<!--            </association>-->
+        </association>
+        <association property="tPsApply" javaType="com.seven.springboot.pojo.TPsApply">
+            <id column="apply_num" property="applyNum"></id>
+            <result column="apply_type" property="applyType"></result>
+            <result column="user_number" property="userNumber"></result>
+            <result column="apply_date" property="applyDate"></result>
+            <result column="apply_time" property="applyTime"></result>
+            <result column="apply_number" property="applyNumber"></result>
+            <result column="apply_reason" property="applyReason"></result>
+            <result column="apply_theme" property="applyTheme"></result>
+            <result column="apply_datetime" property="applyDatetime"></result>
+        </association>
+</resultMap>
+
+    <select id="selmyapp" resultMap="myapply">
+        select * from t_ps_myapply tpm left join t_pm_user tpu on tpm.user_number=tpu.user_number left join t_ps_apply tpa on tpm.myapply_number=tpa.apply_num
+        <where>
+            <if test="myapplyNumber != null and myapplyNumber !='' ">
+                tpa.apply_num like '%${myapplyNumber}%'
+            </if>
+        </where>
+        ORDER BY apply_date desc
+    </select>
+
+    <select id="selmyapp2" resultMap="myapply">
+        select * from t_ps_myapply tpm left join t_pm_user tpu on tpm.user_number=tpu.user_number left join t_ps_apply tpa on tpm.myapply_number=tpa.apply_num
+        <where>
+            myapply_state=0
+            <if test="myapplyNumber != null and myapplyNumber !='' ">
+               and tpa.apply_num like '%${myapplyNumber}%'
+            </if>
+        </where>
+        ORDER BY apply_date desc
+    </select>
+</mapper>

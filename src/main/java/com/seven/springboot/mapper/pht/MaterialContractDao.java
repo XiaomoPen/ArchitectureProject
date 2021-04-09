@@ -12,7 +12,7 @@ import java.util.List;
 public interface MaterialContractDao {
 
     //新增材料合同表
-    @Insert("insert into t_pj_materialContract value (#{contractNumber},#{lxxxdjBh},#{gysBh},#{planNumber},#{userNumber}),#{contractApproval};")
+    @Insert("insert into t_pj_materialContract value (#{contractNumber},#{lxxxdjBh},#{gysBh},#{planNumber},#{userNumber},#{contractApproval});")
     public Integer addContract(TPjMaterialContract contract);
 
     //新增材料合同详细表

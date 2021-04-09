@@ -2,8 +2,10 @@ package com.seven.springboot.controller.csp;
 
 import com.alibaba.fastjson.JSON;
 import com.seven.springboot.pojo.TCtKhxx;
+import com.seven.springboot.pojo.TPmUser;
 import com.seven.springboot.service.csp.TCtKhxxService;
 import com.seven.springboot.service.csp.impl.TCtKhxxServiceImpl;
+import com.seven.springboot.service.lyh.UserService;
 import com.seven.springboot.utils.RestContent;
 import com.seven.springboot.utils.ReturnContent;
 import com.seven.springboot.utils.impl.RandomNumberImpl;
@@ -28,16 +30,16 @@ public class TCtKhxxController {
     private ReturnContent returnContent;
     @Autowired
     private RandomNumberImpl randomNumber;
+    @Autowired
+    private UserService userService;
 
     //查询全部客户信息列表
-
     @GetMapping("/queryAll")
     public RestContent queryAll(){
         List<TCtKhxx> tCtKhxxes = tCtKhxxService.queryAll();
         return returnContent.getContent(tCtKhxxes,"查询成功","error");
     }
     //查询所有客户信息列表并以录入时间降序排列并且无负责人编号查询
-
     @GetMapping("/queryNullAll")
     public RestContent queryNullAll(){
         List<TCtKhxx> tCtKhxxes = tCtKhxxService.queryNullAll();
@@ -45,47 +47,96 @@ public class TCtKhxxController {
     }
 
     //根据登录的员工ID来查询负责的客户，返回给客户信息列表
-
+    //我的客户列表
     @GetMapping("/queryIdAll")
     public RestContent queryIdAll(String userNumber){
-        /*userNumber="20210405";*/
+        userNumber="20210405";
         List<TCtKhxx> tCtKhxxes = tCtKhxxService.queryIdAll(userNumber);
         return returnContent.getContent(tCtKhxxes,"查询成功","error");
     }
 
     //模糊查询客户名称或负责人名称,时间降序排列
-
-    @GetMapping("/querymhcx")
-    public RestContent querymhcx(String khxxXm){
+    @GetMapping("/querymhcx/{khxxm}")
+    public RestContent querymhcx(@PathVariable String khxxm){
         /*khxxXm="科";*/
-        List<TCtKhxx> tCtKhxxes = tCtKhxxService.querymhcx(khxxXm);
+        /*System.out.println(khxxm);*/
+        List<TCtKhxx> tCtKhxxes = tCtKhxxService.querymhcx(JSON.parseObject(khxxm, String.class));
         return returnContent.getContent(tCtKhxxes,"查询成功","error");
     }
-    //新增信息
-
+    //模糊查询客户名称或负责人名称,并在*时间之前,时间倒叙排列
+    @GetMapping("/mhcxsj/{khxx}")
+    public RestContent mhcxsj(@PathVariable String khxx){
+        /*khxxXm="科";*/
+        /*System.out.println(khxxm);*/
+        TCtKhxx tCtKhxx= JSON.parseObject(khxx, TCtKhxx.class);
+        if (tCtKhxx.getKhxxLrsj()!=null&&tCtKhxx.getKhxxXm()!=null){
+            //有时间参数，又有名字参数查询
+            List<TCtKhxx> tCtKhxxes = tCtKhxxService.mhcxsj(tCtKhxx.getKhxxXm(),tCtKhxx.getKhxxLrsj());
+            return returnContent.getContent(tCtKhxxes,"查询成功","error");
+        }
+        if (tCtKhxx.getKhxxLrsj()!=null&&tCtKhxx.getKhxxXm()==""){
+            //时间参数查询
+            List<TCtKhxx> tCtKhxxes = tCtKhxxService.sj(tCtKhxx.getKhxxLrsj());
+            return returnContent.getContent(tCtKhxxes,"查询成功","error");
+        }
+        if(tCtKhxx.getKhxxLrsj()==null&&tCtKhxx.getKhxxXm()!=""){
+            //名字参数查询
+            if (tCtKhxx.getKhxxXm().equals("")){
+                //空白查询
+                List<TCtKhxx> tCtKhxxes = tCtKhxxService.queryNullAll();
+                return returnContent.getContent(tCtKhxxes,"查询成功","error");
+            }
+            List<TCtKhxx> tCtKhxxes = tCtKhxxService.querymhcx(tCtKhxx.getKhxxXm());
+            return returnContent.getContent(tCtKhxxes,"查询成功","error");
+        }
+        List<TCtKhxx> tCtKhxxes = tCtKhxxService.queryNullAll();
+        return returnContent.getContent(tCtKhxxes,"查询成功","error");
+        }
+        /*List<TCtKhxx> tCtKhxxes = tCtKhxxService.querymhcx(JSON.parseObject(khxx, String.class));
+        return returnContent.getContent(tCtKhxxes,"查询成功","error");*/
+    //新增信息客户信息
     @RequestMapping ("/addKhxx/{khxx}")
     public RestContent addKhxx(@PathVariable String khxx){
         //录入当天添加的系统时间
         /*SimpleDateFormat sj=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date=new Date();*/
-        /*System.out.println(khxx);*/
+        System.out.println(khxx);
         TCtKhxx tCtKhxx= JSON.parseObject(khxx, TCtKhxx.class);
         String random = randomNumber.getRandom();//随机编号
         tCtKhxx.setKhxxBh(random);
+        //前台员工id为空白时，设置为null添加
         if (tCtKhxx.getUserNumber().equals("")){
-            tCtKhxx.setUserNumber(null);}//前台员工id为空白时，设置为null添加
-        tCtKhxx.setKhxxLrsj(new Timestamp(new Date().getTime()));//当前系统时间
-        System.out.println(tCtKhxx.toString());
+            tCtKhxx.setUserNumber(null);}
+        //前台员工id为名字时，返查员工表的id和名字，绑定给新增对象属性
+        if(tCtKhxx.getUserMc().length()!=0){
+            List<TPmUser> tPmUsers= tCtKhxxService.scuserid(tCtKhxx.getUserMc());
+            //返查绑定新增对象的姓名
+            tCtKhxx.setUserMc(tPmUsers.get(0).getUserName());
+            //返查绑定新增对象的id
+            tCtKhxx.setUserNumber(tPmUsers.get(0).getUserNumber());
+        }
+        //绑定新增对象的当前系统时间
+        tCtKhxx.setKhxxLrsj(new Timestamp(new Date().getTime()));
+        /*System.out.println(tCtKhxx.toString());*/
         tCtKhxxService.addKhxx(tCtKhxx);
-        System.out.println(random);
+        /*System.out.println(random);*/
+        System.out.println(tCtKhxx.toString());
         return returnContent.getContent(tCtKhxx,"新增成功","error");
     }
-
-    @RequestMapping("/delKhxx")
-    public RestContent delKhxx(String khxxBh){
+    //按编号删除客户信息
+    @RequestMapping("/delKhxx/{khxxBh}")
+    public RestContent delKhxx(@PathVariable String khxxBh){
         /*khxxBh="111111";*/
-        Integer integer=tCtKhxxService.delKhxx(khxxBh);
-        return returnContent.getContent(integer,"删除成功","error");
+        System.out.println(khxxBh);
+        tCtKhxxService.delKhxx(JSON.parseObject(khxxBh, String.class));
+        List<TCtKhxx> tCtKhxxes = tCtKhxxService.queryNullAll();
+        return returnContent.getContent(tCtKhxxes,"删除成功","error");
+    }
+    //查询全部员工信息列表，用于前台搜索员工id和员工名称
+    @GetMapping("/queryUserId")
+    public RestContent queryUserId(){
+        List<TPmUser> tPmUsers=tCtKhxxService.scuser();
+        return returnContent.getContent(tPmUsers,"查询成功","error");
     }
 
 }

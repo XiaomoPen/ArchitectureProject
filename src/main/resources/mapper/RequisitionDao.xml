@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.springboot.mapper.ly.RequisitionDao">
+    <resultMap id="requisition" type="com.seven.springboot.pojo.TPjReceive">
+        <id property="receiveDrawingNumber" column="receive_drawing_number"/>
+        <result property="receiveApplicationDate" column="receive_application_date"/>
+        <result property="receiveDateOfService" column="receive_date_of_service"/>
+        <result property="receiveDrawingNumber" column="receive_drawing_number"/>
+        <result property="receiveDuration" column="receive_duration"/>
+        <result property="receiveReason" column="receive_reason"/>
+        <result property="receiveUrgency" column="receive_urgency"/>
+        <result property="receiveCompany" column="receive_company"/>
+        <result property="receiveModelNumber" column="receive_model_number"/>
+        <result property="receiveProcessState" column="receive_process_state"/>
+        <association property="lxxxdjs" javaType="com.seven.springboot.pojo.TPjLxxxdj">
+            <id property="lxxxdjBh" column="lxxxdj_bh"/>
+            <result property="lxxxdjXmmc" column="lxxxdj_xmmc"/>
+        </association>
+        <association property="departments" javaType="com.seven.springboot.pojo.TPmDepartment">
+            <id property="departmentNumber" column="department_number"/>
+            <result property="departmentName" column="department_name"/>
+        </association>
+        <association property="users" javaType="com.seven.springboot.pojo.TPmUser">
+            <id property="userNumber" column="user_number"/>
+            <result property="userName" column="user_name"/>
+        </association>
+        <association property="equipment" javaType="com.seven.springboot.pojo.TPjEquipment">
+            <id property="equipmentNumber" column="equipment_number"/>
+            <result property="equipmentName" column="equipment_name"/>
+        </association>
+    </resultMap>
+
+    <insert id="addRequisitionApplication" parameterType="TPjReceive">
+        insert into Architecture.t_pj_receive(receive_drawing_number, receive_application_date,
+                                              receive_model_number, receive_duration, receive_type_of_use,
+                                              receive_date_of_service, receive_reason, receive_require,
+                                              receive_process_state, receive_company, receive_applicant,
+                                              receive_urgency, department_number, user_number, lxxxdj_bh,
+                                              equipment_category_number)
+        values (#{receiveDrawingNumber}, #{receiveApplicationDate}, #{receiveModelNumber},
+                #{receiveDuration}, #{receiveTypeOfUse}, #{receiveDateOfService}, #{receiveReason},
+                #{receiveRequire}, #{receiveProcessState}, #{receiveCompany}, #{receiveApplicant}, #{receiveUrgency},
+                #{departmentNumber}, #{userNumber}, #{lxxxdjBh},
+                #{equipmentCategoryNumber})
+    </insert>
+    <select id="findReceiveAll" resultMap="requisition" parameterType="com.seven.springboot.vo.ly.ParamsVo">
+        select *
+        from t_pj_receive
+                     inner join t_pm_department tpd on t_pj_receive.department_number = tpd.department_number
+                     inner join t_pj_lxxxdj tpl on t_pj_receive.lxxxdj_bh = tpl.lxxxdj_bh
+                     inner join t_pm_user tpu on t_pj_receive.user_number = tpu.user_number
+                     inner join t_pj_equipment tpe
+                on t_pj_receive.equipment_category_number = tpe.equipment_category_number
+        <where>
+            <if test="paramsVo.number != null and paramsVo.number != ''">
+                receive_drawing_number like concat('%', #{paramsVo.number}, '%')
+            </if>
+            <if test="paramsVo.equipmentName != null and paramsVo.equipmentName != ''">
+                and tpe.equipment_name like concat('%', #{paramsVo.equipmentName}, '%')
+            </if>
+            <if test="paramsVo.status != null and paramsVo.status != ''">
+                and receive_process_state = #{paramsVo.status}
+            </if>
+            <if test="paramsVo.departmentName != null and paramsVo.departmentName != ''">
+                and tpd.department_name like concat('%', #{paramsVo.departmentName}, '%')
+            </if>
+            <if test="paramsVo.userName != null and paramsVo.userName != ''">
+                and tpu.user_name like concat('%', #{paramsVo.userName}, '%')
+            </if>
+            <if test="paramsVo.useDateStart != null and paramsVo.endOfUseDate != null">
+                and receive_date_of_service between #{paramsVo.useDateStart} and #{paramsVo.endOfUseDate}
+            </if>
+            <if test="paramsVo.applicationDateStarts != null and paramsVo.endOfApplicationDate != null">
+                and receive_application_date between #{paramsVo.applicationDateStarts} and #{paramsVo.endOfApplicationDate}
+            </if>
+        </where>
+    </select>
+
+    <delete id="delRequisitionById" parameterType="String">
+        delete
+        from t_pj_receive
+                where receive_drawing_number in
+        <foreach collection="array" item="receiveItem" open="(" separator="," close=")">
+            #{receiveItem}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,10 +1,13 @@
 package com.seven.springboot.mapper.csp;
 
 import com.seven.springboot.pojo.TCtKhxx;
+import com.seven.springboot.pojo.TPmUser;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 @Repository
@@ -34,5 +37,21 @@ public interface TCtKhxxDao {
 
     //根据编号删除数据
     @Delete("delete from t_ct_khxx where khxx_bh = #{khxxBh} ")
-    public Integer delKhxx(@Param("khxxBh") String khxxBh);
+    public void delKhxx(@Param("khxxBh") String khxxBh);
+
+    //查询客户名称或负责人名称，并在录入时间之前，时间降序排列
+    @Select("select * from t_ct_khxx WHERE (khxx_xm LIKE CONCAT('%',#{khxxXm},'%')or user_mc like CONCAT('%',#{khxxXm},'%')) and khxx_lrsj < #{khxxLrsj} ORDER by khxx_lrsj DESC ")
+    public List<TCtKhxx> mhcxsj(@Param("khxxXm") String khxxXm, @Param("khxxLrsj") Timestamp khxxLrsj);
+
+    //查询录入时间之前,时间降序排列
+    @Select("select * from t_ct_khxx WHERE khxx_lrsj < #{khxxLrsj} ORDER by khxx_lrsj DESC ")
+    public List<TCtKhxx> sj(@Param("khxxLrsj") Timestamp khxxLrsj);
+
+    //查询全部员工信息列表，用于前台搜索员工id和员工名称
+    @Select("select * from t_pm_user ")
+    public List<TPmUser> scuser();
+
+    //用于后台接受到userNumber，查询取出对象的属性
+    @Select("select * from t_pm_user where user_number = #{userNumber}")
+    public List<TPmUser> scuserid(String userNumber);
 }

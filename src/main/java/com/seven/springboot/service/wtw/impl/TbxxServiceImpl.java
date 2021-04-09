@@ -25,7 +25,6 @@ public class TbxxServiceImpl implements TbxxService {
     public TPjTbxx tbxxFinally(String tbxxBh) {
         return tbxxDao.tbxxFinally(tbxxBh);
     }
-
     //删除数据
     public void tbxxDelete(String tbxxBh) {
         tbxxDao.tbxxDelete(tbxxBh);

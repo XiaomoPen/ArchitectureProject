@@ -21,6 +21,7 @@ public class TPmUser {
   private Timestamp userIntime;
   private Timestamp userPositive;
   private Timestamp userDeparture;
+  private String userPassword;
   private String positionNumber;
   private String departmentNumber;
   private Integer userState;
@@ -34,6 +35,13 @@ public class TPmUser {
     this.userNumber = userNumber;
   }
 
+  public String getUserPassword() {
+    return userPassword;
+  }
+
+  public void setUserPassword(String userPassword) {
+    this.userPassword = userPassword;
+  }
 
   public String getUserJobNumber() {
     return userJobNumber;
@@ -199,5 +207,25 @@ public class TPmUser {
 
   public void setCards(List<TPmCard> cards) {
     this.cards = cards;
+  }
+
+  private TPsMyapply tPsMyapply;
+
+  public TPsMyapply gettPsMyapply() {
+    return tPsMyapply;
+  }
+
+  public void settPsMyapply(TPsMyapply tPsMyapply) {
+    this.tPsMyapply = tPsMyapply;
+  }
+
+  private TPsApply tPsApply;
+
+  public TPsApply gettPsApply() {
+    return tPsApply;
+  }
+
+  public void settPsApply(TPsApply tPsApply) {
+    this.tPsApply = tPsApply;
   }
 }

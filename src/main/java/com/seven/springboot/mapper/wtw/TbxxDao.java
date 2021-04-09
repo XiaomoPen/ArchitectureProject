@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface TbxxDao {
+public interface TbxxDao {//投标信息
     //投标信息登记查询
     @Select("select * from t_pj_tbxx")
     public List<TPjTbxx> queryAll();

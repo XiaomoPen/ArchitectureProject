@@ -30,8 +30,12 @@ public class MaterialContractServiceImpl implements MaterialContractService {
         if(inte>0){
             TPjMaterialContractDetailed detailed = contractVo.getDetailed();
             List<TPjClcrkmx> clcrkmxs = contractVo.getClcrkmxs();
-            contractDao.addContractDetailed(detailed);
-            contractDao.addClcrkmx(clcrkmxs);
+            if(detailed!=null){
+                contractDao.addContractDetailed(detailed);
+            }
+            if(null!=clcrkmxs&&clcrkmxs.size()>0){
+                contractDao.addClcrkmx(clcrkmxs);
+            }
             return 1;
         }
         return null;

@@ -9,7 +9,8 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface GysDao {
+public interface GysDao {//供应商
+    //查询所有数据
     @Select("select * from t_pj_gys")
     public List<TPjGys> queryAll();
 }
